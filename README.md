@@ -25,7 +25,7 @@ func main() {
 
 	err = lt.SendLinkToIDM(idm.Link{
 		URL:   "http://www.example.com/",
-		Flags: idm.FlagSlient,
+		Flags: idm.FlagSlience,
 	})
 	if err != nil {
 		log.Fatal(err)

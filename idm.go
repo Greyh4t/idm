@@ -9,7 +9,7 @@ import (
 
 const (
 	FlagNormal     Flag = iota // show confirmations dialogs;
-	FlagSlient                 // do not show any confirmations dialogs;
+	FlagSlience                // do not show any confirmations dialogs;
 	FlagAddToQueue             // add to queue only, do not start downloading.
 )
 
