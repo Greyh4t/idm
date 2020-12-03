@@ -1,13 +1,28 @@
-package main
+package idm
 
-type GUID struct {
-	Data1 uint32
-	Data2 uint16
-	Data3 uint16
-	Data4 [8]byte
+import (
+	"syscall"
+
+	"github.com/lxn/win"
+)
+
+var (
+	CIDMLinkTransmitterCLSID = NewREFCLSID("{AC746233-E9D3-49CD-862F-068F7B7CCCA4}")
+	ICIDMLinkTransmitterIID  = NewREFIID("{4BD46AAE-C51F-4BF7-8BC0-2E86E33D1873}")
+	ICIDMLinkTransmitter2IID = NewREFIID("{94D09862-1875-4FC9-B434-91CF25C840A1}")
+)
+
+func NewREFCLSID(guid string) win.REFCLSID {
+	clsid := win.CLSID(*NewGUID(guid))
+	return win.REFCLSID(&clsid)
 }
 
-func NewGUID(guid string) *GUID {
+func NewREFIID(guid string) win.REFIID {
+	iid := win.IID(*NewGUID(guid))
+	return win.REFIID(&iid)
+}
+
+func NewGUID(guid string) *syscall.GUID {
 	d := []byte(guid)
 	var d1, d2, d3, d4a, d4b []byte
 
@@ -37,7 +52,7 @@ func NewGUID(guid string) *GUID {
 		return nil
 	}
 
-	var g GUID
+	var g syscall.GUID
 	var ok1, ok2, ok3, ok4 bool
 	g.Data1, ok1 = decodeHexUint32(d1)
 	g.Data2, ok2 = decodeHexUint16(d2)
