@@ -53,13 +53,13 @@ func NewIDMLinkTransmitter2() (*IDMLinkTransmitter2, error) {
 	}, nil
 }
 
-func (lt *IDMLinkTransmitter2) SendLinksToIDM(links ...Link) error {
+func (lt *IDMLinkTransmitter2) SendLinkToIDM(links ...Link) error {
 	if len(links) == 0 {
 		return fmt.Errorf("links can't be empty")
 	}
 
 	for _, link := range links {
-		err := lt.SendLinkToIDM(link)
+		err := lt.sendLinkToIDM(link)
 		if err != nil {
 			return err
 		}
@@ -68,7 +68,7 @@ func (lt *IDMLinkTransmitter2) SendLinksToIDM(links ...Link) error {
 	return nil
 }
 
-func (lt *IDMLinkTransmitter2) SendLinkToIDM(link Link) error {
+func (lt *IDMLinkTransmitter2) sendLinkToIDM(link Link) error {
 	if lt.obj == nil {
 		return fmt.Errorf("IDMLinkTransmitter2::SendLinkToIDM is nil")
 	}
