@@ -12,23 +12,23 @@ https://stackoverflow.com/questions/22587681/use-idminternet-download-manager-ap
 package main
 
 import (
-    "log"
+	"log"
 
-    "github.com/greyh4t/idm"
+	"github.com/greyh4t/idm"
 )
 
-func main(){
-    lt, err := idm.NewIDMLinkTransmitter2()
+func main() {
+	lt, err := idm.NewIDMLinkTransmitter2()
 	if err != nil {
 		log.Fatal(err)
-    }
+	}
 
-    err = obj.SendLinkToIDM(lt.Link{
-        URL:"http://www.example.com/",
-        Flags: lt.FlagSlient,
-    })
-    if err != nil {
-        log.Fatal(err)
-    }
+	err = lt.SendLinkToIDM(idm.Link{
+		URL:   "http://www.example.com/",
+		Flags: idm.FlagSlient,
+	})
+	if err != nil {
+		log.Fatal(err)
+	}
 }
 ```
